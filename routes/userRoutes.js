@@ -2,7 +2,7 @@ import express from "express"
 const router = express.Router()
 
 // import controller 
-import {signup,login,logout,forgotPassword, forgotPasswordReset, getLoggedInUserDetails, changePassword, updateUserDetails, adminAllUsers, adminGetOneUser, adminUpdateOneUser, adminDeleteAnyUser, anu} from "../controllers/userController.js"
+import {signup,login,logout,forgotPassword, forgotPasswordReset, getLoggedInUserDetails, changePassword, updateUserDetails, adminAllUsers, adminGetOneUser, adminUpdateOneUser, adminDeleteAnyUser} from "../controllers/userController.js"
 // import userMiddlewares
 import {isLoggedIn,customRole} from "../middlewares/userMiddlewares.js"
 
@@ -14,7 +14,6 @@ router.route("/password/reset/:token").post(forgotPasswordReset)
 router.route("/userDashboard").get(isLoggedIn, getLoggedInUserDetails)
 router.route("/password/update").post(isLoggedIn, changePassword)
 router.route("/userDashboard/update").post(isLoggedIn, updateUserDetails)
-router.route("/anu").post(anu)
 
 
 // admin routes

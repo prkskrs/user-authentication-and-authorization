@@ -4,7 +4,7 @@ import { cookieToken } from "../utils/cookieToken.js";
 import { mailHelper } from "../utils/mailHelper.js";
 import crypto from "crypto";
 
-export const signup=bigPromise(async(req,res,next)=>{
+export const signup = bigPromise(async(req,res,next)=>{
     const {name , email , password}=req.body;
     console.log(name)
     if(!email || !name || !password){
@@ -27,8 +27,12 @@ export const signup=bigPromise(async(req,res,next)=>{
         email:email.toLowerCase(),
         password:password
     })
-    
-    cookieToken(user,res,"Registered Successfully!");
+    user.password=undefined
+    res.status(200).json({
+        success:true,
+        message:"User added successfully!",
+        user
+    })
 })
 
 export const login=bigPromise(async(req,res,next)=>{
@@ -56,7 +60,14 @@ export const login=bigPromise(async(req,res,next)=>{
             message:"Incorrect Password"
         })
     }
-    cookieToken(user,res,"Loggined Successfully!");
+    
+
+    res.status(200).json({
+        success:true,
+        message:"User logged in successfully!",
+        user
+    })
+
 
 })
 
